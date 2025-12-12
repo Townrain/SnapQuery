@@ -38,7 +38,7 @@ import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions;
 
 import java.nio.ByteBuffer;
 import java.util.List;
@@ -72,11 +72,12 @@ public class MyForegroundService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         try {
             createNotificationChannel();
-            textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+            // 使用中文文本识别器选项
+            textRecognizer = TextRecognition.getClient(new ChineseTextRecognizerOptions.Builder().build());
             floatingToast = new FloatingToast(this);
 
             Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setContentTitle("Screen Capture \uD83D\uDCF8")
+                    .setContentTitle("Screen Capture 📸")
                     .setContentText("SnapQuery Screen Capture Service is Running")
                     .setSmallIcon(R.drawable.notification_icon)
                     .build();
