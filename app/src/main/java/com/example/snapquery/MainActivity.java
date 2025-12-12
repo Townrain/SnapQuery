@@ -30,7 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions;
 import androidx.appcompat.app.AlertDialog;
 
 public class MainActivity extends AppCompatActivity{
@@ -93,7 +93,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+        // 使用中文文本识别器选项
+        textRecognizer = TextRecognition.getClient(new ChineseTextRecognizerOptions.Builder().build());
 
         TextView tv = findViewById(R.id.editTextInput);
         tv.addTextChangedListener(new TextWatcher() {
